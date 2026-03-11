@@ -1,148 +1,282 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Surprise</title>
-<link rel="stylesheet" href="style.css">
+<title>Birthday Surprise</title>
+
 <style>
-  body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
-  }
 
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 10px #ff69b4;
-  }
+body{
+margin:0;
+font-family:"Segoe UI";
+text-align:center;
+background:linear-gradient(-45deg,#ff758c,#ff7eb3,#fad0c4,#ffd1ff);
+background-size:400% 400%;
+animation:gradient 10s ease infinite;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
 
-  p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
-  iframe {
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
-    max-width: 100%;
-    height: auto;
-  }
+.screen{
+display:none;
+}
 
-  a {
-    display: inline-block;
-    margin-top: 2rem;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #ff69b4;
-    padding: 10px 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-    transition: background-color 0.3s ease;
-  }
+.active{
+display:block;
+}
 
-  a:hover {
-    background-color: #ff4ca3;
-  }
+button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff4b7d;
+color:white;
+cursor:pointer;
+}
 
-  /* Floating hearts style */
+.cake{
+font-size:120px;
+}
 
-  .heart {
-    position: fixed;
-    bottom: -50px;
-    width: 20px;
-    height: 18px;
-    background-color: #ff4ca3;
-    transform: rotate(-45deg);
-    left: 50%;
-    animation: floatUp 4s linear infinite;
-    opacity: 0.8;
-    border-radius: 10px 10px 0 0;
-    box-shadow: inset -5px 0 0 #e03e8b;
-  }
+.flame{
+font-size:40px;
+margin-top:-70px;
+}
 
-  .heart:before,
-  .heart:after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 18px;
-    background-color: #ff4ca3;
-    border-radius: 50%;
-  }
+/* balloons */
 
-  .heart:before {
-    top: -10px;
-    left: 0;
-  }
+.balloon{
+position:fixed;
+bottom:-100px;
+font-size:40px;
+animation:rise 6s linear forwards;
+}
 
-  .heart:after {
-    top: 0;
-    left: 10px;
-  }
+@keyframes rise{
+0%{transform:translateY(0)}
+100%{transform:translateY(-1000px)}
+}
 
-  @keyframes floatUp {
-    0% {
-      transform: translateX(0) translateY(0) rotate(-45deg);
-      opacity: 0.8;
-    }
-    100% {
-      transform: translateX(calc(var(--x-move, 0) * 1px)) translateY(-110vh) rotate(-45deg);
-      opacity: 0;
-    }
-  }
+/* confetti */
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:0;
+animation:fall 4s linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(0) rotate(0deg);}
+100%{transform:translateY(100vh) rotate(720deg);}
+}
+
+/* gift */
+
+#gift{
+font-size:120px;
+cursor:pointer;
+}
+
+/* slideshow */
+
+#slide{
+width:350px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
 
 </style>
 </head>
 
 <body>
 
-<h1>🎁 Surprise!</h1>
+<!-- birthday music -->
+<audio id="music" loop>
+<source src="hpy.mp3" type="audio/mp3">
+</audio>
 
-<p>You are the best sister ever! 🎉</p>
+<!-- SCREEN 1 -->
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+<div id="screen1" class="screen active">
+<h1>Birthday Surprise 🎂</h1>
+<h2 id="count">3</h2>
+</div>
 
+<!-- SCREEN 2 -->
+
+<div id="screen2" class="screen">
+<h1>Make a Wish</h1>
+<div class="cake">🎂</div>
+<div class="flame">🔥</div>
 <br><br>
+<button onclick="blow()">Blow Candle 💨</button>
+</div>
 
-<a href="index.html">⬅ Back to Dashboard</a>
+<!-- SCREEN 3 -->
 
+<div id="screen3" class="screen">
+<h1>🎉 Happy Birthday! 🎉</h1>
+<h2>Celebration Time</h2>
+</div>
+
+<!-- SCREEN 4 -->
+
+<div id="screen4" class="screen">
+<h1>Open Your Gift 🎁</h1>
+<div id="gift" onclick="openGift()">🎁</div>
+</div>
+
+<!-- SCREEN 5 -->
+
+<div id="screen5" class="screen">
+<h1>💖 Our Memories 💖</h1>
+<img id="slide">
+<p>You are the best sister ever ❤️</p>
+</div>
+<a class="back" href="index.html">⬅ Back to Dashboard</a>
 <script>
-  // Create floating hearts continuously
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
 
-    // Random horizontal start position (0-100 vw)
-    heart.style.left = Math.random() * 100 + 'vw';
+/* change screen */
 
-    // Random animation horizontal movement between -50px and +50px
-    heart.style.setProperty('--x-move', (Math.random() * 100 - 50).toFixed(2));
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"))
+document.getElementById(id).classList.add("active")
+}
 
-    // Random animation duration between 3s and 6s
-    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+/* countdown */
 
-    // Random size scale between 0.5 and 1.2
-    const scale = 0.5 + Math.random() * 0.7;
-    heart.style.transform = `rotate(-45deg) scale(${scale})`;
+let c=3
 
-    document.body.appendChild(heart);
+let timer=setInterval(function(){
 
-    // Remove heart after animation ends
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
-  }
+c--
 
-  // Create a heart every 300 milliseconds
-  setInterval(createHeart, 300);
+document.getElementById("count").innerHTML=c
+
+if(c==0){
+
+clearInterval(timer)
+
+show("screen2")
+
+}
+
+},1000)
+
+/* blow candle */
+
+function blow(){
+
+show("screen3")
+
+document.getElementById("music").play()
+
+confettiExplosion()
+
+startBalloons()
+
+setTimeout(function(){
+
+show("screen4")
+
+},4000)
+
+}
+
+/* balloons */
+
+function startBalloons(){
+
+setInterval(function(){
+
+let b=document.createElement("div")
+
+b.className="balloon"
+
+b.innerHTML="🎈"
+
+b.style.left=Math.random()*100+"vw"
+
+document.body.appendChild(b)
+
+setTimeout(()=>b.remove(),6000)
+
+},300)
+
+}
+
+/* confetti */
+
+function confettiExplosion(){
+
+for(let i=0;i<120;i++){
+
+let conf=document.createElement("div")
+
+conf.className="confetti"
+
+conf.style.left=Math.random()*100+"vw"
+
+conf.style.background=
+["#ff4b7d","#ffd93d","#6bcBef","#9d4edd","#ff8fab"]
+[Math.floor(Math.random()*5)]
+
+document.body.appendChild(conf)
+
+setTimeout(()=>conf.remove(),4000)
+
+}
+
+}
+
+/* slideshow photos */
+
+let photos=[
+"bell.jpeg",
+"kolar.jpg",
+"mee-WA0023.jpg",
+"tr.jpeg",
+"my.jpeg"
+]
+
+let index=0
+
+function startSlideshow(){
+
+document.getElementById("slide").src=photos[0]
+
+setInterval(function(){
+
+index=(index+1)%photos.length
+
+document.getElementById("slide").src=photos[index]
+
+},2000)
+
+}
+
+/* gift open */
+
+function openGift(){
+
+show("screen5")
+
+startSlideshow()
+
+}
+
 </script>
 
 </body>
