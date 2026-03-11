@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Dashboard</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:"Segoe UI",sans-serif;
+    text-align:center;
+    overflow:hidden;
+    color:white;
+}
+
+/* animated canvas background */
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* title */
+
+h1{
+    margin-top:50px;
+    font-size:48px;
+    color:#fff;
+    text-shadow:0 0 15px #ff8acb;
+}
+
+/* dashboard layout */
+
+.dashboard{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+    margin-top:70px;
+}
+
+/* pink glass cards */
+
+.card{
+    width:230px;
+    padding:30px;
+    border-radius:18px;
+    text-decoration:none;
+    color:white;
+
+    background:rgba(255,182,193,0.25);
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    box-shadow:0 10px 30px rgba(255,105,180,0.4);
+
+    transition:0.35s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+    box-shadow:0 20px 50px rgba(255,105,180,0.8);
+}
+
+/* subtitle */
+
+.card p{
+    opacity:0.9;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<h1>🎂 Welcome to Your Birthday Dashboard 💖</h1>
+
+<div class="dashboard">
+
+<a href="memories.html" class="card">
+📸 <h2>Memories</h2>
+<p>Our favorite moments</p>
+</a>
+
+<a href="message.html" class="card">
+💌 <h2>Message</h2>
+<p>A letter for you</p>
+</a>
+
+<a href="gallery.html" class="card">
+✨ <h2>Her Gallery</h2>
+<p>Your beautiful photos</p>
+</a>
+
+<a href="surprise.html" class="card">
+🎁 <h2>Surprise</h2>
+<p>Open the gift</p>
+</a>
+
+</div>
+
+<script>
+
+/* pink particles background */
+
+const canvas = document.getElementById("bg")
+const ctx = canvas.getContext("2d")
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<120;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        size:Math.random()*3+1,
+        speedX:(Math.random()-0.5)*0.8,
+        speedY:(Math.random()-0.5)*0.8
+    })
+}
+
+function animate(){
+
+    ctx.fillStyle="rgba(255,182,193,0.15)"
+    ctx.fillRect(0,0,canvas.width,canvas.height)
+
+    particles.forEach(p=>{
+        ctx.beginPath()
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+        ctx.fillStyle="#ff69b4"
+        ctx.fill()
+
+        p.x+=p.speedX
+        p.y+=p.speedY
+
+        if(p.x<0||p.x>canvas.width) p.speedX*=-1
+        if(p.y<0||p.y>canvas.height) p.speedY*=-1
+    })
+
+    requestAnimationFrame(animate)
+}
+
+animate()
+
+</script>
+
+</body>
+</html>
+

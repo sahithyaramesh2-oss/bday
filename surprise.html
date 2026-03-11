@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Surprise</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px #ff69b4;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  iframe {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #ff69b4;
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    transition: background-color 0.3s ease;
+  }
+
+  a:hover {
+    background-color: #ff4ca3;
+  }
+
+  /* Floating hearts style */
+
+  .heart {
+    position: fixed;
+    bottom: -50px;
+    width: 20px;
+    height: 18px;
+    background-color: #ff4ca3;
+    transform: rotate(-45deg);
+    left: 50%;
+    animation: floatUp 4s linear infinite;
+    opacity: 0.8;
+    border-radius: 10px 10px 0 0;
+    box-shadow: inset -5px 0 0 #e03e8b;
+  }
+
+  .heart:before,
+  .heart:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    background-color: #ff4ca3;
+    border-radius: 50%;
+  }
+
+  .heart:before {
+    top: -10px;
+    left: 0;
+  }
+
+  .heart:after {
+    top: 0;
+    left: 10px;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateX(0) translateY(0) rotate(-45deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateX(calc(var(--x-move, 0) * 1px)) translateY(-110vh) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+</style>
+</head>
+
+<body>
+
+<h1>🎁 Surprise!</h1>
+
+<p>You are the best sister ever! 🎉</p>
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+
+<br><br>
+
+<a href="index.html">⬅ Back to Dashboard</a>
+
+<script>
+  // Create floating hearts continuously
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+
+    // Random horizontal start position (0-100 vw)
+    heart.style.left = Math.random() * 100 + 'vw';
+
+    // Random animation horizontal movement between -50px and +50px
+    heart.style.setProperty('--x-move', (Math.random() * 100 - 50).toFixed(2));
+
+    // Random animation duration between 3s and 6s
+    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+
+    // Random size scale between 0.5 and 1.2
+    const scale = 0.5 + Math.random() * 0.7;
+    heart.style.transform = `rotate(-45deg) scale(${scale})`;
+
+    document.body.appendChild(heart);
+
+    // Remove heart after animation ends
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  // Create a heart every 300 milliseconds
+  setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>

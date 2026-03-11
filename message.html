@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Message</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: "Segoe UI", sans-serif;
+    text-align:center;
+    color:white;
+    background: linear-gradient(-45deg,#ff758c,#ff7eb3,#fad0c4,#ffd1ff);
+    background-size:400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+h1{
+    margin-top:40px;
+    font-size:40px;
+}
+
+/* message card */
+
+.message-box{
+    background:white;
+    color:#333;
+    width:60%;
+    margin:40px auto;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.3);
+    font-size:20px;
+    line-height:1.7;
+}
+
+/* back button */
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 25px;
+    background:white;
+    color:#ff4b7d;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* floating hearts */
+
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-800px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>💌 A Special Message For You</h1>
+
+<div class="message-box">
+<p id="message"></p>
+</div>
+
+<a class="back" href="index.html">⬅ Back to Dashboard</a>
+
+<script>
+
+/* typewriter message */
+
+const text = `i just wanted to say how much you mean to me. you are not just my sister but also my best friend
+u can never be replaced by anyone u have been for me always whenever i wanted you ,you guided me been there for me everytime  ❤️
+thank you for evrything and ur such a happy soul and i am reaaly proud of whatever you have been today
+you are such a inspiration and i will never forget that late night talks ,forcing you come to evry family occassion
+and those hours of random talks ... i wish we could meet soo often and still make much memories and yeah definetely sharing all the drama in my life ....
+i never spoke so much about anything with anyone . so happy to have a sister like youuu .. hope u get whatever u wished ...
+happiest birthday to the happiest soul... happyyyy birthdayyyy akkkaaaa .... 🎂💖`;
+
+let i = 0;
+
+function typeWriter(){
+    if(i < text.length){
+        document.getElementById("message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter,35);
+    }
+}
+
+typeWriter();
+
+/* floating hearts */
+
+function createHeart(){
+    const heart=document.createElement("div")
+    heart.classList.add("heart")
+    heart.innerHTML="💖"
+    heart.style.left=Math.random()*100+"vw"
+    heart.style.fontSize=(20+Math.random()*20)+"px"
+
+    document.body.appendChild(heart)
+
+    setTimeout(()=>{heart.remove()},6000)
+}
+
+setInterval(createHeart,600)
+
+</script>
+
+</body>
+</html>
